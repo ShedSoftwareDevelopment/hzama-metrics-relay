@@ -80,10 +80,13 @@ def parse_report(raw_gzip_bytes: bytes):
 
 
 def main():
-    key_id = os.environ["ASC_KEY_ID"]
-    issuer_id = os.environ["ASC_ISSUER_ID"]
-    private_key = os.environ["ASC_PRIVATE_KEY"]
-    vendor_number = os.environ["ASC_VENDOR_NUMBER"]
+    key_id = os.environ["ASC_KEY_ID"].strip()
+    issuer_id = os.environ["ASC_ISSUER_ID"].strip()
+    # Tolerate the secret being pasted either as a real multi-line PEM or as
+    # a single line with literal backslash-n sequences (e.g. copied straight
+    # out of the JSON credentials file without unescaping).
+    private_key = os.environ["ASC_PRIVATE_KEY"].strip().replace("\\n", "\n")
+    vendor_number = os.environ["ASC_VENDOR_NUMBER"].strip()
 
     report_date = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
 
