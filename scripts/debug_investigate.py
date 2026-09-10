@@ -57,6 +57,7 @@ def main():
             "filter[reportSubType]": "SUMMARY",
             "filter[reportType]": "SUBSCRIPTION",
             "filter[vendorNumber]": vendor_number,
+            "filter[version]": "1_4",
         },
         headers={**headers, "Accept": "application/a-gzip"},
     )
@@ -79,6 +80,7 @@ def main():
             "filter[reportSubType]": "SUMMARY",
             "filter[reportType]": "SUBSCRIPTION_EVENT",
             "filter[vendorNumber]": vendor_number,
+            "filter[version]": "1_4",
         },
         headers={**headers, "Accept": "application/a-gzip"},
     )
@@ -108,7 +110,43 @@ def main():
             headers=headers,
         )
         print("status", resp.status_code)
-        print(json.dumps(resp.json(), indent=2)[:2000])
+        existing = resp.json()
+        print(json.dumps(existing, indent=2)[:2000])
+
+        request_id = None
+        if existing.get("data"):
+            request_id = existing["data"][0]["id"]
+            print("Using existing request:", request_id)
+        else:
+            print("\n=== 5b. Creating ONGOING analyticsReportRequest ===")
+            create_resp = requests.post(
+                "https://api.appstoreconnect.apple.com/v1/analyticsReportRequests",
+                headers={**headers, "Content-Type": "application/json"},
+                json={
+                    "data": {
+                        "type": "analyticsReportRequests",
+                        "attributes": {"accessType": "ONGOING"},
+                        "relationships": {"app": {"data": {"type": "apps", "id": app_id}}},
+                    }
+                },
+            )
+            print("status", create_resp.status_code)
+            print(json.dumps(create_resp.json(), indent=2)[:2000])
+            if create_resp.status_code in (200, 201):
+                request_id = create_resp.json()["data"]["id"]
+
+        if request_id:
+            print("\n=== 6. Reports under this request ===")
+            resp = requests.get(
+                f"https://api.appstoreconnect.apple.com/v1/analyticsReportRequests/{request_id}/reports",
+                headers=headers,
+            )
+            print("status", resp.status_code)
+            reports_data = resp.json()
+            for r in reports_data.get("data", []):
+                print(" -", r["id"], r["attributes"].get("name"), r["attributes"].get("category"))
+            if not reports_data.get("data"):
+                print(json.dumps(reports_data, indent=2)[:1500])
 
 
 if __name__ == "__main__":
