@@ -1,4 +1,4 @@
-name: Fetch App Store metrics
+name: Fetch App Store and Supabase metrics
 
 on:
   schedule:
@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: pip install pyjwt cryptography requests
 
-      - name: Fetch yesterday's App Store Connect sales report
+      - name: Fetch yesterday's App Store Connect data
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
@@ -29,10 +29,15 @@ jobs:
           ASC_VENDOR_NUMBER: ${{ secrets.ASC_VENDOR_NUMBER }}
         run: python scripts/fetch_appstore_metrics.py
 
+      - name: Fetch Supabase usage metrics
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/fetch_supabase_metrics.py
+
       - name: Commit and push result
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add appstore-metrics.json
-          git diff --quiet --cached || git commit -m "Update App Store metrics"
+          git add appstore-metrics.json supabase-metrics.json
+          git diff --quiet --cached || git commit -m "Update App Store and Supabase metrics"
           git push
