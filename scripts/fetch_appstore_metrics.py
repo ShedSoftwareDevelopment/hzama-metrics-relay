@@ -74,19 +74,27 @@ def fetch_sales(client: AppleClient, vendor_number: str, report_date: str):
         accept="application/a-gzip",
     )
     if resp.status_code == 404:
-        return {"downloads": 0, "monthly_subs": 0, "yearly_subs": 0, "revenue": 0.0, "revenue_currency": None}
+        return {"downloads": 0, "updates": 0, "monthly_subs": 0, "yearly_subs": 0, "revenue": 0.0, "revenue_currency": None}
     if resp.status_code != 200:
         return {"error": f"HTTP {resp.status_code}: {resp.text[:300]}"}
 
     text = gzip.decompress(resp.content).decode("utf-8")
     reader = csv.DictReader(io.StringIO(text), delimiter="\t")
-    downloads = monthly_subs = yearly_subs = 0
+    downloads = updates = monthly_subs = yearly_subs = 0
     revenue_by_currency: dict = {}
     for row in reader:
         sku = row.get("SKU", "")
         units = int(row.get("Units", "0") or 0)
+        # Product Type Identifier "1" = a real download/install; "7" = an
+        # app update being delivered to an existing user. Apple's own Sales
+        # Report lumps both under the app SKU's Units column, so without
+        # this check "downloads" silently includes update installs too.
+        product_type = row.get("Product Type Identifier", "")
         if sku == APP_SKU:
-            downloads += units
+            if product_type == "7":
+                updates += units
+            else:
+                downloads += units
         elif sku in (MONTHLY_PRODUCT_ID, YEARLY_PRODUCT_ID):
             proceeds = float(row.get("Developer Proceeds", "0") or 0)
             currency = row.get("Currency of Proceeds", "")
@@ -104,6 +112,7 @@ def fetch_sales(client: AppleClient, vendor_number: str, report_date: str):
 
     return {
         "downloads": downloads,
+        "updates": updates,
         "monthly_subs": monthly_subs,
         "yearly_subs": yearly_subs,
         "revenue": revenue,
