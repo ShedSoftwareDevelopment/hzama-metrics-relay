@@ -1,6 +1,6 @@
 {
-  "report_date": "2026-09-15",
-  "fetched_at": "2026-09-16T11:06:52.022799+00:00",
+  "report_date": "2026-09-16",
+  "fetched_at": "2026-09-17T11:15:55.964993+00:00",
   "status": "ok",
   "total_profiles": 6,
   "new_profiles_yesterday": 0,
@@ -13,7 +13,7 @@
   "total_distance_km": 0,
   "calibration_method_breakdown": {
     "none": 3,
-    "gps": 1,
-    "height": 2
+    "height": 2,
+    "gps": 1
   }
 }
