@@ -70,11 +70,16 @@ def fetch_sales(client: AppleClient, vendor_number: str, report_date: str):
             "filter[reportSubType]": "SUMMARY",
             "filter[reportType]": "SALES",
             "filter[vendorNumber]": vendor_number,
+            "filter[version]": "1_4",
         },
         accept="application/a-gzip",
     )
     if resp.status_code == 404:
-        return {"downloads": 0, "updates": 0, "monthly_subs": 0, "yearly_subs": 0, "revenue": 0.0, "revenue_currency": None}
+        return {
+            "downloads": 0, "updates": 0, "monthly_subs": 0, "yearly_subs": 0,
+            "revenue": 0.0, "revenue_currency": None,
+            "_note": f"404 from Apple for reportDate={report_date} — treated as zero, but confirm this isn't masking a real failure",
+        }
     if resp.status_code != 200:
         return {"error": f"HTTP {resp.status_code}: {resp.text[:300]}"}
 
@@ -138,7 +143,10 @@ def fetch_active_subscribers(client: AppleClient, vendor_number: str, report_dat
         accept="application/a-gzip",
     )
     if resp.status_code == 404:
-        return {"monthly": 0, "yearly": 0}
+        return {
+            "monthly": 0, "yearly": 0,
+            "_note": f"404 from Apple for reportDate={report_date} — treated as zero, but confirm this isn't masking a real failure",
+        }
     if resp.status_code != 200:
         return {"error": f"HTTP {resp.status_code}: {resp.text[:300]}"}
 
@@ -238,10 +246,11 @@ def main():
     subscription_events = fetch_subscription_events(client, vendor_number, report_date)
     reviews = fetch_reviews(client)
 
+    any_error = "error" in sales or "error" in active_subscribers or "error" in subscription_events
     result = {
         "report_date": report_date,
         "fetched_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        "status": "error" if "error" in sales else "ok",
+        "status": "error" if any_error else "ok",
     }
     result.update(sales)
     result["active_subscribers"] = active_subscribers
