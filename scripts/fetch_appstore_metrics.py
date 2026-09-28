@@ -70,7 +70,7 @@ def fetch_sales(client: AppleClient, vendor_number: str, report_date: str):
             "filter[reportSubType]": "SUMMARY",
             "filter[reportType]": "SALES",
             "filter[vendorNumber]": vendor_number,
-            "filter[version]": "1_4",
+            "filter[version]": "1_1",
         },
         accept="application/a-gzip",
     )
