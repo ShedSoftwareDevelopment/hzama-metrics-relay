@@ -125,6 +125,23 @@ def fetch_sales(client: AppleClient, vendor_number: str, report_date: str):
     }
 
 
+def fetch_sales_recent(client: AppleClient, vendor_number: str, start_date: str, max_back: int = 6):
+    """Apple's daily Sales Report isn't reliably published within 24h for this
+    vendor — a 404 means 'not published yet', not 'zero sales that day'. Walk
+    backward from start_date until we find a day Apple actually has a report
+    for. Returns (data, actual_date_used)."""
+    day = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    last_result = None
+    for _ in range(max_back):
+        date_str = day.strftime("%Y-%m-%d")
+        result = fetch_sales(client, vendor_number, date_str)
+        last_result = (result, date_str)
+        if "error" not in result and "_note" not in result:
+            return result, date_str
+        day -= datetime.timedelta(days=1)
+    return last_result
+
+
 def fetch_active_subscribers(client: AppleClient, vendor_number: str, report_date: str):
     """SUBSCRIPTION report: a snapshot of currently-active subscriptions per plan,
     broken into many state/offer-type columns. Summing all the numeric
@@ -238,17 +255,18 @@ def main():
     private_key = os.environ["ASC_PRIVATE_KEY"].strip().replace("\\n", "\n")
     vendor_number = os.environ["ASC_VENDOR_NUMBER"].strip()
 
-    report_date = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+    requested_date = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
     client = AppleClient(key_id, issuer_id, private_key)
 
-    sales = fetch_sales(client, vendor_number, report_date)
-    active_subscribers = fetch_active_subscribers(client, vendor_number, report_date)
-    subscription_events = fetch_subscription_events(client, vendor_number, report_date)
+    sales, sales_date = fetch_sales_recent(client, vendor_number, requested_date)
+    active_subscribers = fetch_active_subscribers(client, vendor_number, requested_date)
+    subscription_events = fetch_subscription_events(client, vendor_number, requested_date)
     reviews = fetch_reviews(client)
 
     any_error = "error" in sales or "error" in active_subscribers or "error" in subscription_events
     result = {
-        "report_date": report_date,
+        "report_date": sales_date,
+        "requested_report_date": requested_date,
         "fetched_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "status": "error" if any_error else "ok",
     }
