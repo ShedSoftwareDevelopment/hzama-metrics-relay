@@ -1,6 +1,7 @@
 {
-  "report_date": "2026-09-29",
-  "fetched_at": "2026-09-30T20:49:07.470134+00:00",
+  "report_date": "2026-09-24",
+  "requested_report_date": "2026-09-29",
+  "fetched_at": "2026-09-30T21:01:39.667774+00:00",
   "status": "ok",
   "downloads": 0,
   "updates": 0,
@@ -8,7 +9,7 @@
   "yearly_subs": 0,
   "revenue": 0.0,
   "revenue_currency": null,
-  "_note": "404 from Apple for reportDate=2026-09-29 \u2014 treated as zero, but confirm this isn't masking a real failure",
+  "_note": "404 from Apple for reportDate=2026-09-24 \u2014 treated as zero, but confirm this isn't masking a real failure",
   "active_subscribers": {
     "monthly": 2,
     "yearly": 1
