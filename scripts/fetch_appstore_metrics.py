@@ -281,8 +281,14 @@ def main():
 
     print(json.dumps(result, indent=2))
 
-    if result["status"] == "error":
-        sys.exit(1)
+    # Deliberately NOT sys.exit(1) on status == "error": the workflow's next
+    # step (commit and push) must always run so today's best-available data
+    # (even a partial/errored fetch) actually reaches the repo. A hard exit
+    # here previously skipped the commit step entirely on any sub-fetch
+    # error, silently freezing the published JSON for days during Apple's
+    # Oct 2026 outage. Downstream consumers already read `status` to detect
+    # and handle errors gracefully — failing the CI job added no value and
+    # actively made things worse.
 
 
 if __name__ == "__main__":
