@@ -1,6 +1,6 @@
 {
-  "report_date": "2026-09-29",
-  "fetched_at": "2026-09-30T21:01:39.837280+00:00",
+  "report_date": "2026-10-08",
+  "fetched_at": "2026-10-09T12:50:03.652787+00:00",
   "status": "ok",
   "total_profiles": 7,
   "new_profiles_yesterday": 0,
@@ -9,7 +9,7 @@
   "total_programmes": 2,
   "active_programmes": 2,
   "completed_programmes": 0,
-  "active_users_7d": 1,
+  "active_users_7d": 0,
   "total_distance_km": 0,
   "calibration_method_breakdown": {
     "none": 3,
