@@ -1,16 +1,16 @@
 {
-  "report_date": "2026-10-05",
-  "requested_report_date": "2026-10-10",
-  "fetched_at": "2026-10-11T12:21:48.111188+00:00",
+  "report_date": "2026-10-06",
+  "requested_report_date": "2026-10-11",
+  "fetched_at": "2026-10-12T14:49:40.678004+00:00",
   "status": "error",
-  "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"M2PIHDENPFHJTF36JAPYPIJKOA\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links",
+  "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"DH4EU5AG6L4WB6RBT326Y2NUTM\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links",
   "active_subscribers": {
-    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"BAAJV4BWCBQ5AVSZGTQPWFS4BI\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
+    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"RHIGID5TMKK5E5ZXQX3IZEPZYA\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
   },
   "subscription_events": {
-    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"KVSRUIDKWNNXQLA2M6PVHWFLSQ\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
+    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"MT6UY5JDEUCZYVYSOJ2XGDAGOM\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
   },
   "reviews": {
-    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"3YXG5MZR6EJDDOCXKKLYJE5BGY\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
+    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"4AFS5A5NZBHRYEOLL4NYBQIX3A\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
   }
 }
