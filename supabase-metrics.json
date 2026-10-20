@@ -1,19 +1,19 @@
 {
-  "report_date": "2026-10-18",
-  "fetched_at": "2026-10-19T12:34:25.345139+00:00",
+  "report_date": "2026-10-19",
+  "fetched_at": "2026-10-20T11:08:29.559583+00:00",
   "status": "ok",
   "total_profiles": 7,
   "new_profiles_yesterday": 0,
-  "total_runs": 1,
+  "total_runs": 2,
   "new_runs_yesterday": 0,
   "total_programmes": 2,
   "active_programmes": 2,
   "completed_programmes": 0,
-  "active_users_7d": 0,
-  "total_distance_km": 0,
+  "active_users_7d": 1,
+  "total_distance_km": 2.8,
   "calibration_method_breakdown": {
-    "gps": 1,
     "none": 3,
+    "gps": 1,
     "height": 3
   }
 }
