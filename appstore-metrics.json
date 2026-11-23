@@ -1,16 +1,22 @@
 {
-  "report_date": "2026-11-16",
-  "requested_report_date": "2026-11-21",
-  "fetched_at": "2026-11-22T14:17:36.786203+00:00",
-  "status": "error",
-  "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"7GPJQONNW53S6LXNZD2OVRJTPY\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links",
+  "report_date": "2026-11-21",
+  "requested_report_date": "2026-11-22",
+  "fetched_at": "2026-11-23T17:40:47.235490+00:00",
+  "status": "ok",
+  "downloads": 1,
+  "updates": 0,
+  "monthly_subs": 0,
+  "yearly_subs": 0,
+  "revenue": 0.0,
+  "revenue_currency": null,
   "active_subscribers": {
-    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"CRKIZZSPH5JYR57KO7V2TMO7QE\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
+    "monthly": 1,
+    "yearly": 1
   },
-  "subscription_events": {
-    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"JPP7L7EST57NP244YXDLJX2QWU\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
-  },
+  "subscription_events": {},
   "reviews": {
-    "error": "HTTP 403: {\n\"errors\" : [ {\n\"id\" : \"UTKPDYLM2TUAY53QHSHKIZQHOM\",\n\"status\" : \"403\",\n\"code\" : \"FORBIDDEN.REQUIRED_AGREEMENTS_MISSING_OR_EXPIRED\",\n\"title\" : \"A required agreement is missing or has expired.\",\n\"detail\" : \"This request requires an in-effect agreement that has not been signed or has expired.\",\n\"links"
+    "total_count": 0,
+    "average_rating_recent": null,
+    "latest": null
   }
 }
